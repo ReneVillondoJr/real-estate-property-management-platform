@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  price       Decimal  @db.Decimal(12, 2)
+  status      String
+  type        String
+  bedrooms    Int
+  bathrooms   Int
+  area        Int
+  location    String
+  imageUrl    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  inquiries   Inquiry[]
+  appointments Appointment[]
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  role      String   @default("CUSTOMER")
+  createdAt DateTime @default(now())
+  inquiries Inquiry[]
+  appointments Appointment[]
+}
+
+model Inquiry {
+  id         String   @id @default(cuid())
+  message    String
+  status     String   @default("NEW")
+  propertyId String
+  userId     String?
+  property   Property @relation(fields: [propertyId], references: [id])
+  user       User?    @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model Appointment {
+  id         String   @id @default(cuid())
+  startsAt   DateTime
+  status     String   @default("REQUESTED")
+  propertyId String
+  userId     String?
+  property   Property @relation(fields: [propertyId], references: [id])
+  user       User?    @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+}

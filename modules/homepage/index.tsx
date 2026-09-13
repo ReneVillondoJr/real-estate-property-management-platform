@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import { PropertyCard } from '@/components/property/PropertyCard';
+import { PropertyCard } from '@/modules/homepage/components/PropertyCard';
 import { properties } from '@/modules/properties/data/properties';
 
 export function Homepage() {

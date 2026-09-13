@@ -16,7 +16,7 @@ export function AdminAgentsView() {
     useAgents();
 
   return (
-    <main className='p-6 lg:p-10'>
+    <div className='p-6 lg:p-10'>
       <div className='mx-auto max-w-6xl'>
         <AdminHeader
           eyebrow='Team'
@@ -112,6 +112,6 @@ export function AdminAgentsView() {
           }
         </section>
       </div>
-    </main>
+    </div>
   );
 }

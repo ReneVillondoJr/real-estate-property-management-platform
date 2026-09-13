@@ -30,7 +30,7 @@ export function NewAgentView() {
   const isSaving = saveState === 'saving';
 
   return (
-    <main className='p-6 lg:p-10'>
+    <div className='p-6 lg:p-10'>
       <div className='mx-auto max-w-5xl'>
         <Link
           href='/admin/agents'
@@ -235,6 +235,6 @@ export function NewAgentView() {
           </div>
         </section>
       </div>
-    </main>
+    </div>
   );
 }

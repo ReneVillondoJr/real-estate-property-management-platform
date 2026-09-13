@@ -20,17 +20,14 @@ export function AgentDetailView({ id }: { id: string }) {
   }
 
   return (
-    <main className='p-6 lg:p-10'>
-      {' '}
+    <div className='p-6 lg:p-10'>
       <div className='mx-auto max-w-5xl'>
-        {' '}
         <Link
           href='/admin/agents'
           className='inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
         >
-          {' '}
           <ArrowLeft size={15} strokeWidth={1.7} />
-          Agents{' '}
+          Agents
         </Link>
         <div className='mt-6'>
           <AdminHeader
@@ -124,6 +121,6 @@ export function AgentDetailView({ id }: { id: string }) {
           </div>
         </section>
       </div>
-    </main>
+    </div>
   );
 }

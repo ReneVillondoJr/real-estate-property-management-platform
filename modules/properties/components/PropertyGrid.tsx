@@ -1,4 +1,4 @@
-import { PropertyCard } from '@/components/property/PropertyCard';
+import { PropertyCard } from '@/modules/homepage/components/PropertyCard';
 import type { Property } from '../data/properties';
 
 export function PropertyGrid({ properties }: { properties: Property[] }) {

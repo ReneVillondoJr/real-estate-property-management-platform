@@ -1,10 +1,5 @@
-export default function AdminInquiriesPage() {
-  return (
-    <main className='p-8 lg:p-12'>
-      <h1 className='display text-5xl'>Inquiries</h1>
-      <p className='sans mt-5 text-sm text-[var(--muted)]'>
-        Track incoming property inquiries.
-      </p>
-    </main>
-  );
+import { InquiryView } from '@/modules/inquiries';
+
+export default function InquiriesPage() {
+  return <InquiryView />;
 }

@@ -28,14 +28,15 @@ export function PublicNav() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className='hidden items-center gap-8 text-[11px] uppercase tracking-[0.18em] text-[var(--muted)] md:flex'>
+        <nav className='hidden items-center gap-9 text-[13.5px] text-[var(--muted)] md:flex'>
           {publicNavigationItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className='transition-colors duration-300 hover:text-[var(--ink)]'
+              className='group relative py-1 transition-colors duration-300 hover:text-[var(--ink)]'
             >
               {item.label}
+              <span className='absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-[var(--ink)] transition-transform duration-300 group-hover:scale-x-100' />
             </Link>
           ))}
         </nav>
@@ -43,7 +44,7 @@ export function PublicNav() {
         {/* Desktop CTA */}
         <Link
           href='/schedule-viewing'
-          className='group hidden items-center gap-2 border-b border-[var(--ink)] pb-1 text-[11px] uppercase tracking-[0.16em] text-[var(--ink)] transition-colors duration-300 hover:border-[var(--rust)] hover:text-[var(--rust)] sm:flex'
+          className='group hidden items-center gap-2 rounded-full border border-[var(--ink)] px-5 py-2 text-[13px] text-[var(--ink)] transition-colors duration-300 hover:border-[var(--rust)] hover:text-[var(--rust)] sm:flex'
         >
           <span>Book a viewing</span>
 
@@ -89,9 +90,7 @@ export function PublicNav() {
 
               {/* Navigation */}
               <nav className='flex flex-1 flex-col px-6 py-10'>
-                <p className='mb-6 text-[10px] uppercase tracking-[0.22em] text-[var(--muted)]'>
-                  Explore
-                </p>
+                <p className='mb-6 text-[12px] text-[var(--muted)]'>Explore</p>
 
                 <div className='flex flex-col'>
                   {publicNavigationItems.map((item) => (
@@ -100,11 +99,11 @@ export function PublicNav() {
                         href={item.href}
                         className='group flex items-center gap-5 border-b border-[var(--line)] py-5 transition-colors duration-300 first:border-t hover:text-[var(--rust)]'
                       >
-                        <span className='w-5 text-[10px] tracking-[0.15em] text-[var(--muted)]'>
+                        <span className='w-5 text-[10px] text-[var(--muted)]/60'>
                           {item.number}
                         </span>
 
-                        <span className='display text-[2rem] leading-none tracking-[-0.04em]'>
+                        <span className='display text-[1.9rem] leading-none tracking-[-0.03em]'>
                           {item.label}
                         </span>
 
@@ -124,7 +123,7 @@ export function PublicNav() {
                 <SheetClose asChild>
                   <Link
                     href='/schedule-viewing'
-                    className='group flex items-center justify-between border-b border-[var(--ink)] pb-3 text-[11px] uppercase tracking-[0.18em] transition-colors duration-300 hover:border-[var(--rust)] hover:text-[var(--rust)]'
+                    className='group flex items-center justify-center gap-2 rounded-full border border-[var(--ink)] py-3 text-[13px] text-[var(--ink)] transition-colors duration-300 hover:border-[var(--rust)] hover:text-[var(--rust)]'
                   >
                     <span>Book a private viewing</span>
 

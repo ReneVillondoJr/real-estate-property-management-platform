@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { AdminHeader } from '@/components/admin-header';
+import Link from 'next/link';
+import { Plus } from 'lucide-react';
 
 const stats = [
   { label: 'Active listings', value: '24', change: '+3 this month' },
@@ -9,11 +11,18 @@ const stats = [
 ];
 export default function DashboardPage() {
   return (
-    <main className='p-8 lg:p-12'>
+    <main className='p-8 lg:p-10'>
       <AdminHeader
         eyebrow='Monday, September 11, 2026'
         title='Good morning, Maya.'
-        action={<Button className='px-5 py-3'>+ Add property</Button>}
+        action={
+          <Link href='/admin/properties/new'>
+            <Button size='sm' className='text-white!'>
+              <Plus />
+              Add property
+            </Button>
+          </Link>
+        }
       />
       <div className='mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4'>
         {stats.map((stat) => (

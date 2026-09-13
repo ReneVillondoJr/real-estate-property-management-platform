@@ -10,30 +10,28 @@ export function AdminNav() {
   const pathname = usePathname();
 
   return (
-    <aside className='sans flex h-screen w-64 shrink-0 flex-col border-r border-white/10 bg-[var(--ink)] px-5 py-7 text-white'>
+    <aside className='fixed inset-y-0 left-0 z-40 flex w-64 shrink-0 flex-col border-r border-border bg-sidebar px-5 py-7 text-sidebar-foreground'>
       {/* Brand */}
-      <div>
+      <div className='shrink-0'>
         <Link
           href='/admin/dashboard'
-          className='display text-2xl leading-none tracking-[-0.05em]'
+          className='font-serif text-[22px] leading-none tracking-[-0.02em] text-foreground'
         >
-          Morrow
-          <span className='text-[#b6c6b5]'>&</span>
-          Co.
+          Morrow <span className='text-primary'>&</span> Co.
         </Link>
 
-        <p className='mt-3 text-[9px] uppercase tracking-[0.2em] text-[#9eab9d]'>
-          Operations
-        </p>
+        <p className='mt-2.5 text-[11px] text-muted-foreground'>Operations</p>
       </div>
 
+      <div className='mt-8 h-px shrink-0 bg-border' />
+
       {/* Navigation */}
-      <nav className='mt-12 flex-1'>
-        <p className='mb-4 px-3 text-[9px] uppercase tracking-[0.2em] text-white/40'>
+      <nav className='mt-8 min-h-0 flex-1 overflow-y-auto'>
+        <p className='mb-3 px-3 text-[11px] text-muted-foreground'>
           Management
         </p>
 
-        <div className='space-y-1'>
+        <div className='space-y-0.5'>
           {adminNavigationItems.map((item) => {
             const Icon = item.icon;
 
@@ -45,21 +43,24 @@ export function AdminNav() {
                 key={item.href}
                 href={item.href}
                 className={[
-                  'group flex items-center gap-3 px-3 py-2.5',
-                  'text-[10px] uppercase tracking-[0.13em]',
-                  'transition-all duration-200',
+                  'group relative flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px]',
+                  'transition-colors duration-150',
                   isActive ?
-                    'bg-white/10 text-white'
-                  : 'text-[#b8c5b5] hover:bg-white/5 hover:text-white',
+                    'bg-accent text-foreground'
+                  : 'text-muted-foreground hover:bg-accent hover:text-foreground',
                 ].join(' ')}
               >
+                {isActive && (
+                  <span className='absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-primary' />
+                )}
+
                 <Icon
-                  size={15}
+                  size={16}
                   strokeWidth={1.6}
                   className={[
                     'shrink-0 transition-colors',
-                    isActive ? 'text-[#b6c6b5]' : (
-                      'text-[#7f8c7f] group-hover:text-[#b6c6b5]'
+                    isActive ? 'text-primary' : (
+                      'text-muted-foreground group-hover:text-primary'
                     ),
                   ].join(' ')}
                 />
@@ -72,13 +73,13 @@ export function AdminNav() {
       </nav>
 
       {/* Footer */}
-      <div className='border-t border-white/10 pt-5'>
+      <div className='mt-5 shrink-0 border-t border-border pt-5'>
         <Link
           href='/'
-          className='flex items-center gap-3 px-3 py-2.5 text-[10px] uppercase tracking-[0.13em] text-[#8f9b8f] transition-colors hover:text-white'
+          className='flex items-center gap-3 rounded-md px-3 py-2.5 text-[13px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground'
         >
-          <FileText size={15} strokeWidth={1.6} />
-          View Website
+          <FileText size={16} strokeWidth={1.6} />
+          View website
         </Link>
       </div>
     </aside>

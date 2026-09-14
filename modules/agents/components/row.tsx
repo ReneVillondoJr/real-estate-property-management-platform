@@ -2,10 +2,7 @@ import Link from 'next/link';
 
 import { ArrowUpRight, BriefcaseBusiness, MapPin } from 'lucide-react';
 
-import {
-  agentStatusBadgeClass,
-  agentStatusLabel,
-} from '../components/lib/status-budge';
+import { agentStatusBadgeClass, agentStatusLabel } from './status-budge';
 
 import type { Agent } from '../types/agent';
 

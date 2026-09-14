@@ -1,16 +1,15 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
 import { ArrowLeft, Mail, MapPin, Phone } from 'lucide-react';
 
 import { AdminHeader } from '@/components/admin-header';
+import { Button } from '@/components/ui/button';
 
-import { AgentAvatar } from '../../components/avatar';
-import { AgentStat } from '../../components/stat';
-import {
-  agentStatusBadgeClass,
-  agentStatusLabel,
-} from '../../components/lib/status-budge';
-import { getAgent } from '../../data/agents';
+import { AgentAvatar } from './avatar';
+import { AgentStat } from './stat';
+import { agentStatusBadgeClass, agentStatusLabel } from './status-budge';
+import { getAgent } from '../data/agents';
 
 export function AgentDetailView({ id }: { id: string }) {
   const agent = getAgent(id);
@@ -22,27 +21,20 @@ export function AgentDetailView({ id }: { id: string }) {
   return (
     <div className='p-6 lg:p-10'>
       <div className='mx-auto max-w-5xl'>
-        <Link
-          href='/admin/agents'
-          className='inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
-        >
-          <ArrowLeft size={15} strokeWidth={1.7} />
-          Agents
-        </Link>
-        <div className='mt-6'>
-          <AdminHeader
-            eyebrow='Team member'
-            title={agent.name}
-            description={`${agent.title} · ${agent.territory}`}
-            action={
-              <span
-                className={`ui-badge ${agentStatusBadgeClass(agent.status)}`}
-              >
-                {agentStatusLabel(agent.status)}
-              </span>
-            }
-          />
-        </div>
+        <AdminHeader
+          eyebrow='Team member'
+          title={agent.name}
+          description={`${agent.title} · ${agent.territory}`}
+          action={
+            <Link href='/admin/agents'>
+              <Button variant='outline' size='sm'>
+                <ArrowLeft />
+                Back to agents
+              </Button>
+            </Link>
+          }
+        />
+
         <div className='mt-6 flex items-center gap-4'>
           <AgentAvatar name={agent.name} size='lg' />
 
@@ -52,6 +44,7 @@ export function AgentDetailView({ id }: { id: string }) {
             <p className='mt-1 text-xs text-muted-foreground'>{agent.title}</p>
           </div>
         </div>
+
         <div className='mt-6 grid gap-3 sm:grid-cols-3'>
           <AgentStat label='Active listings' value={agent.activeListings} />
 
@@ -59,15 +52,26 @@ export function AgentDetailView({ id }: { id: string }) {
 
           <AgentStat label='Joined' value={agent.joinedAt} />
         </div>
+
         <section className='mt-6 overflow-hidden rounded-xl border border-border bg-card shadow-sm'>
           <div className='border-b border-border px-5 py-4 sm:px-6'>
-            <h2 className='text-sm font-semibold text-foreground'>
-              Contact information
-            </h2>
+            <div className='flex items-center justify-between gap-4'>
+              <div>
+                <h2 className='text-sm font-semibold text-foreground'>
+                  Contact information
+                </h2>
 
-            <p className='mt-1 text-xs text-muted-foreground'>
-              Direct contact details for this team member.
-            </p>
+                <p className='mt-1 text-xs text-muted-foreground'>
+                  Direct contact details for this team member.
+                </p>
+              </div>
+
+              <span
+                className={`ui-badge ${agentStatusBadgeClass(agent.status)}`}
+              >
+                {agentStatusLabel(agent.status)}
+              </span>
+            </div>
           </div>
 
           <div className='divide-y divide-border'>

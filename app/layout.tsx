@@ -1,13 +1,17 @@
 import type { Metadata } from 'next';
+
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Morrow & Co. | Real estate, thoughtfully managed',
-  description:
-    'A considered collection of homes, spaces, and the people who care for them.',
+  title: 'Real Estate Property Management Platform',
+  description: 'Property management and real estate administration platform.',
 };
 
-export default function RootLayout({ children }: LayoutProps<'/'>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang='en'>
       <body>{children}</body>

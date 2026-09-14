@@ -1,12 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+
 import { useRouter } from 'next/navigation';
+
 import { ArrowLeft } from 'lucide-react';
 
 import { AdminHeader } from '@/components/admin-header';
+
 import { Button } from '@/components/ui/button';
+
 import { Input } from '@/components/ui/input';
+
 import {
   Select,
   SelectContent,
@@ -15,7 +20,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import { useAgentForm } from '../../hooks/use-agent-form';
+import { useAgentForm } from '../hooks/use-agent-form';
 
 export function NewAgentView() {
   const router = useRouter();
@@ -32,20 +37,20 @@ export function NewAgentView() {
   return (
     <div className='p-6 lg:p-10'>
       <div className='mx-auto max-w-5xl'>
-        <Link
-          href='/admin/agents'
-          className='inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground'
-        >
-          <ArrowLeft size={15} strokeWidth={1.7} />
-          Agents
-        </Link>
-        <div className='mt-6'>
-          <AdminHeader
-            eyebrow='Team'
-            title='Add an agent'
-            description='Create a new team member and add them to your agent roster.'
-          />
-        </div>
+        <AdminHeader
+          eyebrow='Team'
+          title='Add an agent'
+          description='Create a new team member and add them to your agent roster.'
+          action={
+            <Link href='/admin/agents'>
+              <Button variant='outline' size='sm'>
+                <ArrowLeft />
+                Back to agents
+              </Button>
+            </Link>
+          }
+        />
+
         <section className='mt-6 overflow-hidden rounded-xl border border-border bg-card shadow-sm'>
           <div className='border-b border-border px-5 py-5 sm:px-6'>
             <h2 className='text-sm font-semibold text-foreground'>
@@ -106,9 +111,7 @@ export function NewAgentView() {
 
                 <SelectContent>
                   <SelectItem value='Agent'>Agent</SelectItem>
-
                   <SelectItem value='Senior Agent'>Senior Agent</SelectItem>
-
                   <SelectItem value='Team Lead'>Team Lead</SelectItem>
                 </SelectContent>
               </Select>
@@ -211,9 +214,7 @@ export function NewAgentView() {
 
                 <SelectContent>
                   <SelectItem value='active'>Active</SelectItem>
-
                   <SelectItem value='on-leave'>On leave</SelectItem>
-
                   <SelectItem value='inactive'>Inactive</SelectItem>
                 </SelectContent>
               </Select>

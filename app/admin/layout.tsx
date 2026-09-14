@@ -1,3 +1,4 @@
+import { AdminAuthGuard } from '@/components/login/admin-auth-guard';
 import { AdminNav } from '@/components/navigation/Admin-sidevar';
 
 export default function AdminLayout({
@@ -6,12 +7,14 @@ export default function AdminLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className='min-h-screen bg-background'>
-      <AdminNav />
+    <AdminAuthGuard>
+      <div className='min-h-screen bg-background'>
+        <AdminNav />
 
-      <div className='min-h-screen pl-64'>
-        <main className='min-w-0'>{children}</main>
+        <div className='min-h-screen pl-64'>
+          <main className='min-w-0'>{children}</main>
+        </div>
       </div>
-    </div>
+    </AdminAuthGuard>
   );
 }

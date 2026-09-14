@@ -1,4 +1,4 @@
-import { AgentDetailView } from '@/modules/agents/components/views/agent-detail-view';
+import { AgentDetailView } from '@/modules/agents/components/agent-detail-view';
 
 export default async function AdminAgentPage({
   params,

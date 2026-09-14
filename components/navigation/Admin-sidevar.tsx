@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FileText } from 'lucide-react';
 
+import { AdminLogout } from '@/components/login/admin-logout';
 import { adminNavigationItems } from '@/constants/navigation-items';
 
 export function AdminNav() {
@@ -81,6 +82,10 @@ export function AdminNav() {
           <FileText size={16} strokeWidth={1.6} />
           View website
         </Link>
+
+        <div className='mt-3'>
+          <AdminLogout className='w-full justify-center' />
+        </div>
       </div>
     </aside>
   );

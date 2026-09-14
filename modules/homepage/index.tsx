@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
+
 import { PropertyCard } from '@/modules/homepage/components/PropertyCard';
 import { properties } from '@/modules/properties/data/properties';
 
 export function Homepage() {
   return (
-    <main>
+    <div>
       <section className='mx-auto grid max-w-[1440px] gap-10 px-6 pb-24 pt-16 lg:grid-cols-[1.08fr_.92fr] lg:items-end lg:px-12 lg:pt-24'>
         <div>
           <p className='sans mb-8 text-[10px] uppercase tracking-[0.22em] text-[var(--rust)]'>
@@ -91,6 +92,6 @@ export function Homepage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

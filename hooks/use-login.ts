@@ -1,10 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-const STORAGE_KEY = 'real-estate-demo-user';
+import {
+  authChangeEvent,
+  authStorageKey,
+  defaultLoginValues,
+  demoUser,
+} from '../data/login';
 
 function isValidAdminUser(value: string | null): boolean {
   if (!value) {
@@ -25,7 +30,7 @@ function isValidAdminUser(value: string | null): boolean {
   }
 }
 
-function getCallbackUrl() {
+function getCallbackUrl(): string {
   const params = new URLSearchParams(window.location.search);
 
   return params.get('callbackUrl') || '/admin/dashboard';
@@ -34,16 +39,25 @@ function getCallbackUrl() {
 export function useLogin() {
   const router = useRouter();
 
-  const [email, setEmail] = useState('admin@morrowco.com');
-
-  const [password, setPassword] = useState('admin123');
-
-  const [error, setError] = useState('');
-
+  const [email, setEmail] = useState(defaultLoginValues.email);
+  const [password, setPassword] = useState(defaultLoginValues.password);
+  const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const storedUser = window.localStorage.getItem(STORAGE_KEY);
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 60);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    const storedUser = window.localStorage.getItem(authStorageKey);
 
     if (!isValidAdminUser(storedUser)) {
       return;
@@ -52,37 +66,42 @@ export function useLogin() {
     router.replace(getCallbackUrl());
   }, [router]);
 
-  const login = () => {
-    if (!email.trim() || !password.trim()) {
-      setError('Please enter both email and password.');
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
+    setError('');
+
+    if (!email.trim() || !password.trim()) {
+      setError('Enter both your email and password to continue.');
       return;
     }
 
     setIsSubmitting(true);
-    setError('');
 
-    const demoUser = {
-      id: 'demo-admin',
-      name: 'Alex Morgan',
+    const user = {
+      ...demoUser,
       email: email.trim(),
-      role: 'ADMIN' as const,
     };
 
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(demoUser));
+    window.localStorage.setItem(authStorageKey, JSON.stringify(user));
+    window.dispatchEvent(new Event(authChangeEvent));
 
-    window.dispatchEvent(new Event('real-estate-auth-change'));
-
-    router.push(getCallbackUrl());
+    setTimeout(() => {
+      setIsSubmitting(false);
+      router.push(getCallbackUrl());
+    }, 500);
   };
 
   return {
     email,
-    setEmail,
     password,
-    setPassword,
-    error,
+    showPassword,
     isSubmitting,
-    login,
+    error,
+    mounted,
+    setEmail,
+    setPassword,
+    setShowPassword,
+    handleSubmit,
   };
 }

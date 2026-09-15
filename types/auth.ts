@@ -2,7 +2,7 @@ export type DemoUser = {
   id: string;
   name: string;
   email: string;
-  role: 'ADMIN';
+  role: 'ADMIN' | 'USER';
 };
 
 export type LoginFormValues = {
